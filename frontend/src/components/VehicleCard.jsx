@@ -1,5 +1,8 @@
+import React from 'react'
+
 function VehicleCard({ vehicle, onPurchase }) {
   const {
+    id,
     make,
     model,
     category,
@@ -7,35 +10,38 @@ function VehicleCard({ vehicle, onPurchase }) {
     quantity,
   } = vehicle
 
-  const isSoldOut = quantity === 0
+  const isOutOfStock = quantity === 0
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-
-      <h2 className="text-xl font-bold">
-        {make} {model}
+    <div className="rounded-xl bg-white p-6 shadow-md">
+      <h2 className="text-xl font-bold text-gray-900">
+        {make}
       </h2>
 
-      <p className="text-gray-500 mt-2">
-        Category: {category}
+      <h3 className="text-lg text-gray-700">
+        {model}
+      </h3>
+
+      <p className="mt-2 text-gray-500">
+        {category}
       </p>
 
-      <p className="text-2xl font-bold mt-4">
+      <p className="mt-3 text-2xl font-bold text-blue-600">
         ${price.toLocaleString()}
       </p>
 
-      <p className="mt-2">
-        Stock: {quantity}
+      <p className="mt-2 text-sm text-gray-600">
+        {quantity} available
       </p>
 
       <button
-        disabled={isSoldOut}
-        onClick={() => onPurchase?.(vehicle)}
-        className="w-full mt-5 bg-blue-600 text-white py-2 rounded-lg font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed"
+        type="button"
+        disabled={isOutOfStock}
+        onClick={() => onPurchase(id)}
+        className="mt-4 w-full rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-400"
       >
-        {isSoldOut ? 'Sold Out' : 'Purchase'}
+        {isOutOfStock ? 'Out of Stock' : 'Purchase'}
       </button>
-
     </div>
   )
 }

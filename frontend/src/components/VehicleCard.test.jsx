@@ -1,63 +1,74 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import VehicleCard from './VehicleCard'
 
-const vehicle = {
-  id: 1,
-  make: 'Toyota',
-  model: 'Camry',
-  category: 'Sedan',
-  price: 28000,
-  quantity: 5,
-}
-
 describe('VehicleCard', () => {
+  const vehicle = {
+    id: 1,
+    make: 'Toyota',
+    model: 'Camry',
+    category: 'Sedan',
+    price: 25000,
+    quantity: 5,
+  }
+
   it('renders vehicle details', () => {
-    render(<VehicleCard vehicle={vehicle} />)
+    render(
+      <VehicleCard
+        vehicle={vehicle}
+        onPurchase={vi.fn()}
+      />
+    )
 
-    expect(screen.getByText('Toyota Camry')).toBeInTheDocument()
-    expect(screen.getByText(/sedan/i)).toBeInTheDocument()
-    expect(screen.getByText(/\$28,000/)).toBeInTheDocument()
-    expect(screen.getByText(/stock: 5/i)).toBeInTheDocument()
+    expect(screen.getByText('Toyota')).toBeInTheDocument()
+    expect(screen.getByText('Camry')).toBeInTheDocument()
+    expect(screen.getByText('Sedan')).toBeInTheDocument()
+    expect(screen.getByText('$25,000')).toBeInTheDocument()
   })
 
-  it('renders the purchase button when vehicle is available', () => {
-    render(<VehicleCard vehicle={vehicle} />)
+  it('shows available stock quantity', () => {
+    render(
+      <VehicleCard
+        vehicle={vehicle}
+        onPurchase={vi.fn()}
+      />
+    )
 
-    expect(
-      screen.getByRole('button', { name: /purchase/i })
-    ).toBeInTheDocument()
+    expect(screen.getByText(/5 available/i)).toBeInTheDocument()
   })
 
-  it('calls purchase handler when purchase is clicked', async () => {
-    const handlePurchase = vi.fn()
+  it('calls purchase function when purchase button is clicked', () => {
+    const onPurchase = vi.fn()
 
     render(
       <VehicleCard
         vehicle={vehicle}
-        onPurchase={handlePurchase}
+        onPurchase={onPurchase}
       />
     )
 
-    screen.getByRole('button', { name: /purchase/i }).click()
+    fireEvent.click(
+      screen.getByRole('button', { name: /purchase/i })
+    )
 
-    expect(handlePurchase).toHaveBeenCalledWith(vehicle)
+    expect(onPurchase).toHaveBeenCalledWith(vehicle.id)
   })
 
-  it('disables purchase when stock is zero', () => {
-    const soldOutVehicle = {
+  it('disables purchase button when quantity is zero', () => {
+    const outOfStockVehicle = {
       ...vehicle,
-      make: 'BMW',
-      model: 'X5',
       quantity: 0,
     }
 
-    render(<VehicleCard vehicle={soldOutVehicle} />)
+    render(
+      <VehicleCard
+        vehicle={outOfStockVehicle}
+        onPurchase={vi.fn()}
+      />
+    )
 
-    const button = screen.getByRole('button', {
-      name: /sold out/i,
-    })
-
-    expect(button).toBeDisabled()
+    expect(
+      screen.getByRole('button', { name: /out of stock/i })
+    ).toBeDisabled()
   })
 })
