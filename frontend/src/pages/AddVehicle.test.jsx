@@ -1,3 +1,4 @@
+import { VehicleProvider } from '../context/VehicleContext'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
@@ -8,7 +9,9 @@ describe('Add Vehicle Page', () => {
   it('renders the add vehicle heading', () => {
     render(
       <MemoryRouter>
-        <AddVehicle />
+        <VehicleProvider>
+          <AddVehicle />
+        </VehicleProvider>
       </MemoryRouter>
     )
 
@@ -20,7 +23,9 @@ describe('Add Vehicle Page', () => {
   it('renders vehicle form fields', () => {
     render(
       <MemoryRouter>
-        <AddVehicle />
+        <VehicleProvider>
+          <AddVehicle />
+        </VehicleProvider>
       </MemoryRouter>
     )
 
@@ -33,7 +38,9 @@ describe('Add Vehicle Page', () => {
   it('renders the save vehicle button', () => {
     render(
       <MemoryRouter>
-        <AddVehicle />
+        <VehicleProvider>
+          <AddVehicle />
+        </VehicleProvider>
       </MemoryRouter>
     )
 
@@ -47,7 +54,9 @@ describe('Add Vehicle Page', () => {
 
     render(
       <MemoryRouter>
-        <AddVehicle />
+        <VehicleProvider>
+          <AddVehicle />
+        </VehicleProvider>
       </MemoryRouter>
     )
 

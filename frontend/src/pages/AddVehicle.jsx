@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useVehicles } from '../context/VehicleContext'
 
 function AddVehicle() {
+  const navigate = useNavigate()
+  const { addVehicle } = useVehicles()
+
   const [formData, setFormData] = useState({
     make: '',
     model: '',
@@ -20,7 +25,13 @@ function AddVehicle() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    console.log('Vehicle:', formData)
+    addVehicle({
+      ...formData,
+      year: Number(formData.year),
+      price: Number(formData.price),
+    })
+
+    navigate('/inventory')
   }
 
   return (

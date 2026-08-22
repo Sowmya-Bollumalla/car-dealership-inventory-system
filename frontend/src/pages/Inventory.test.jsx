@@ -1,3 +1,4 @@
+import { VehicleProvider } from '../context/VehicleContext'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
@@ -7,7 +8,9 @@ describe('Inventory Page', () => {
   it('renders the inventory heading', () => {
     render(
       <MemoryRouter>
-        <Inventory />
+        <VehicleProvider>
+          <Inventory />
+        </VehicleProvider>
       </MemoryRouter>
     )
 
@@ -19,7 +22,9 @@ describe('Inventory Page', () => {
   it('renders the add vehicle button', () => {
     render(
       <MemoryRouter>
-        <Inventory />
+        <VehicleProvider>
+          <Inventory />
+        </VehicleProvider>
       </MemoryRouter>
     )
 
@@ -31,7 +36,9 @@ describe('Inventory Page', () => {
   it('renders the search vehicles input', () => {
     render(
       <MemoryRouter>
-        <Inventory />
+        <VehicleProvider>
+          <Inventory />
+        </VehicleProvider>
       </MemoryRouter>
     )
 

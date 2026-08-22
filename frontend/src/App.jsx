@@ -1,20 +1,29 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { VehicleProvider } from './context/VehicleContext'
+
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import Inventory from './pages/Inventory'
+import AddVehicle from './pages/AddVehicle'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-10 rounded-2xl shadow-xl text-center">
-        <h1 className="text-4xl font-bold text-blue-600">
-          Car Dealership Inventory System
-        </h1>
+    <BrowserRouter>
+      <VehicleProvider>
+        <Navbar />
 
-        <p className="mt-4 text-gray-600">
-          Frontend setup successful!
-        </p>
-
-        <button className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-          Get Started
-        </button>
-      </div>
-    </div>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/add-vehicle" element={<AddVehicle />} />
+        </Routes>
+      </VehicleProvider>
+    </BrowserRouter>
   )
 }
 
