@@ -3,14 +3,13 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 import Inventory from './Inventory'
+import { AuthProvider } from '../context/AuthContext'
 
 describe('Inventory Page', () => {
   it('renders the inventory heading', () => {
     render(
       <MemoryRouter>
-        <VehicleProvider>
-          <Inventory />
-        </VehicleProvider>
+        <AuthProvider><VehicleProvider><Inventory /></VehicleProvider></AuthProvider>
       </MemoryRouter>
     )
 
@@ -19,26 +18,20 @@ describe('Inventory Page', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the add vehicle button', () => {
+  it('hides the add vehicle button for unauthenticated users', () => {
     render(
       <MemoryRouter>
-        <VehicleProvider>
-          <Inventory />
-        </VehicleProvider>
+        <AuthProvider><VehicleProvider><Inventory /></VehicleProvider></AuthProvider>
       </MemoryRouter>
     )
 
-    expect(
-      screen.getByRole('button', { name: /add vehicle/i })
-    ).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /add vehicle/i })).not.toBeInTheDocument()
   })
 
   it('renders the search vehicles input', () => {
     render(
       <MemoryRouter>
-        <VehicleProvider>
-          <Inventory />
-        </VehicleProvider>
+        <AuthProvider><VehicleProvider><Inventory /></VehicleProvider></AuthProvider>
       </MemoryRouter>
     )
 

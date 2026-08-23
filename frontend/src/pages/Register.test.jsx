@@ -2,12 +2,13 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 import Register from './Register'
+import { AuthProvider } from '../context/AuthContext'
 
 describe('Register Page', () => {
   it('renders the register heading', () => {
     render(
       <MemoryRouter>
-        <Register />
+        <AuthProvider><Register /></AuthProvider>
       </MemoryRouter>
     )
 
@@ -19,7 +20,7 @@ describe('Register Page', () => {
   it('renders name, email, password and confirm password inputs', () => {
     render(
       <MemoryRouter>
-        <Register />
+        <AuthProvider><Register /></AuthProvider>
       </MemoryRouter>
     )
 
@@ -43,7 +44,7 @@ describe('Register Page', () => {
   it('renders the register button', () => {
     render(
       <MemoryRouter>
-        <Register />
+        <AuthProvider><Register /></AuthProvider>
       </MemoryRouter>
     )
 
@@ -55,7 +56,7 @@ describe('Register Page', () => {
   it('renders a login link', () => {
     render(
       <MemoryRouter>
-        <Register />
+        <AuthProvider><Register /></AuthProvider>
       </MemoryRouter>
     )
 
