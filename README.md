@@ -214,8 +214,6 @@ Branches   : 93.8%
 |---|---|
 | Login | `screenshots/login.png` |
 | Register | `screenshots/register.png` |
-| Dashboard | `screenshots/dashboard.png` |
-| Search & Filter | `screenshots/search.png` |
 | Admin Controls | `screenshots/admin.png` |
 | Add Vehicle | `screenshots/add-vehicle.png` |
 | Purchase Flow | `screenshots/purchase.png` |
@@ -307,49 +305,33 @@ npm run build             # production build check
 
 ---
 
-## My AI Usage
+## AI Usage and Co-Authorship
 
-### Tools Used
-- **Amazon Q Developer** (IDE plugin) — primary AI assistant throughout the
-  project
+AI tools were used selectively during the development of this project as development assistants.
 
-### How I Used AI
+AI assistance was used for specific tasks such as:
+- Generating and refining some boilerplate code
+- Debugging and resolving implementation issues
+- Suggesting improvements to React components and backend logic
+- Assisting with test cases and documentation
+- Reviewing code and suggesting possible improvements
 
-| Task | How AI Was Used |
-|---|---|
-| Project scaffolding | Asked Q to inspect the existing repository structure and identify what was already in place before writing any new code |
-| TDD cycle | Used Q to generate initial failing test stubs for auth endpoints, then implemented the code manually to make them pass |
-| Backend implementation | Q suggested the repository pattern structure; I reviewed, adapted, and wired it to the Express routes manually |
-| Database schema | Discussed the schema design with Q, including the `CHECK (quantity >= 0)` constraint and the migration strategy for adding `image_url` |
-| Frontend UI redesign | Described the desired "Burnt Asphalt" dark theme and asked Q to implement it across components; reviewed every file before accepting |
-| Bug diagnosis | Pasted error messages into Q to identify the CORS/proxy misconfiguration (`baseURL` vs Vite proxy) |
-| Image mapping fix | Q helped design the 4-level priority lookup (exact model → partial model → brand → generic fallback) in `vehicleImages.js` |
-| Wishlist feature | Described the requirements; Q scaffolded `WishlistContext`, `Wishlist.jsx`, and the navbar badge; I reviewed and integrated |
-| README | Used Q to draft sections; edited for accuracy and tone |
+The AI tools used during development included **ChatGPT** and **Amazon Q**.
 
-### Reflection
+All AI-generated or AI-assisted code was reviewed, tested, modified, and integrated by the project developer. The overall project architecture, feature requirements, implementation decisions, testing, and final integration were handled by the developer.
 
-AI made me significantly faster at the mechanical parts of full-stack
-development — boilerplate, schema migrations, CSS theming — which freed up
-mental energy for the parts that actually require judgement: data model
-decisions, test design, and making sure the TDD cycle was genuine rather than
-retrofitted. The most valuable interactions were diagnostic ones: describing a
-symptom and having Q reason through the cause (e.g. the CORS issue) rather
-than just generating code. I reviewed every AI-generated file before
-committing it, and in several cases rewrote sections that were technically
-correct but didn't match the project's existing patterns. AI is a force
-multiplier, not a replacement for understanding what you're building.
+AI assistance was used only where helpful and does not represent the entirety of the project implementation.
 
-### Co-authorship
+### AI Co-Authorship
 
-All commits where AI assistance was used include the trailer:
-```
-Co-authored-by: Amazon Q <amazonq@users.noreply.github.com>
-```
+For commits where AI assistance was used to generate or substantially modify code, the relevant AI tool is credited as a co-author in the Git commit, in accordance with the project requirements.
 
-See `PROMPTS.md` for the complete raw conversation log.
+Examples:
 
----
+`Co-authored-by: ChatGPT <chatgpt@openai.com>`
+
+`Co-authored-by: Amazon Q <amazonq@users.noreply.github.com>`
+
 
 ## Git Workflow
 
